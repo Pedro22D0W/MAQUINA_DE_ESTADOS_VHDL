@@ -17,6 +17,7 @@ ARCHITECTURE logica OF PROJETO_FINAL IS
     SIGNAL ESTADO, PROX : STATE;
     SIGNAL R1, R2, R3, A1, G1 : std_logic_vector(3 DOWNTO 0);
 BEGIN 
+
     PROCESS(Reset, Clock)
     BEGIN 
         IF Reset = '1' THEN
@@ -47,56 +48,87 @@ BEGIN
                 END IF;
                 
             WHEN B =>
-                A1 <= R2;
+               
                 PROX <= H;
                 
             WHEN H =>
-                G1 <= A1-R1;
+               
                 PROX <= I;
                 
             WHEN I =>
-                DONE <= '1';
-                R3 <= G1;
+                
                 PROX <= A;
                 
             WHEN C =>
-                A1 <= R2;
+                
                 PROX <= J;
                 
             WHEN J =>
-                G1 <= A1+R1;
+                
                 PROX <= K;
                 
             WHEN K =>
-                DONE <= '1';
-                R3 <= G1;
+                
                 PROX <= A;
                 
             WHEN D =>
-                R3 <= R2;
+                
                 PROX <= L;
                 
             WHEN L =>
-                R2 <= R1;
+                
                 PROX <= M;
                 
             WHEN M =>
-                R1 <= R3;
+               
                 PROX <= A;
                 
             WHEN E =>
-                R1 <= DATA;
+               
                 PROX <= A;
                 
             WHEN F =>
-                R2 <= DATA;
+                
                 PROX <= A;
                 
             WHEN G =>
-                R3 <= DATA;
+                
                 PROX <= A;
         END CASE;
     END PROCESS;
+	 PROCESS(ESTADO,Clock)
+		BEGIN
+			CASE ESTADO IS 
+	 
+				WHEN A =>
+				DONE <= '1';
+				WHEN B =>
+				A1 <= R2;
+				WHEN C =>
+				A1 <= R2;
+				WHEN D =>
+				R3 <= R2;
+				WHEN E =>
+				R1 <= DATA;
+				WHEN F =>
+				R2 <= DATA;
+				WHEN G =>
+				R3 <= DATA;
+				WHEN H =>
+				G1 <= A1 XOR R1;
+				WHEN I =>
+				R3 <= G1;
+				WHEN J =>
+				G1 <= A1 XOR R1;
+				WHEN K =>
+				R3 <= G1;
+				WHEN L =>
+				R2 <= R1;
+				WHEN M =>
+				R1 <= R3;
+				
+			END CASE;
+	END PROCESS;   
 END logica;
 
 			
