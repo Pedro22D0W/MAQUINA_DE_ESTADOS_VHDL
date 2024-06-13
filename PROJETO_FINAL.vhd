@@ -9,7 +9,7 @@ ENTITY PROJETO_FINAL IS
     PORT(
         Clock,Reset : IN std_logic;
 		  FUNC : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
-        R1in,R2in,R3in,R1out,R2out,R3out : OUT STD_LOGIC
+        R1i,R2i,R3i,Ai,Gi,R1o,R2o,R3o,Ao,Go : OUT STD_LOGIC
     );
 	 
 END PROJETO_FINAL;
@@ -103,61 +103,173 @@ BEGIN
 	 
 				WHEN A =>
 				
+				
+				
 				WHEN B =>
 				
-				R2out <= '1';
-				Ain <= '1';
+				R1i<='0';
+				R2i<='0';
+				R3i<='0';
+				Ai<='1';
+				Gi<='0';
+				R1o<='0';
+				R2o<='1';
+				R3o<='0';
+				Ao<='0';
+				Go<='0';
 				
 				WHEN C =>
-
-				R2out <= '1';
-				Ain <= '1';
+				
+				R1i<='0';
+				R2i<='0';
+				R3i<='0';
+				Ai<='1';
+				Gi<='0';
+				R1o<='0';
+				R2o<='1';
+				R3o<='0';
+				Ao<='0';
+				Go<='0';
 				
 				WHEN D =>
 				
-				R2out <= '1';
-				R3in <= '1';
+				
+				R1i<='0';
+				R2i<='0';
+				R3i<='1';
+				Ai<='0';
+				Gi<='0';
+				R1o<='0';
+				R2o<='1';
+				R3o<='0';
+				Ao<='0';
+				Go<='0';
 				
 				WHEN E =>
 				
-				R1in <= '1'
+				R1i<='1';
+				R2i<='0';
+				R3i<='0';
+				Ai<='0';
+				Gi<='0';
+				R1o<='0';
+				R2o<='1';
+				R3o<='0';
+				Ao<='0';
+				Go<='0';
 				
-				WHEN F =>;
+				WHEN F =>
 				
-				R2in <= '1'
+
+				
+				R1i<='0';
+				R2i<='1';
+				R3i<='0';
+				Ai<='0';
+				Gi<='0';
+				R1o<='0';
+				R2o<='0';
+				R3o<='0';
+				Ao<='0';
+				Go<='0';
 				
 				WHEN G =>
 				
-				R3in <= '1'
-				DONE <= '1'
+				R1i<='0';
+				R2i<='0';
+				R3i<='1';
+				Ai<='0';
+				Gi<='0';
+				R1o<='0';
+				R2o<='0';
+				R3o<='0';
+				Ao<='0';
+				Go<='0';
+				
 				
 				WHEN H =>
 				
-				R2out <= '1'
-				Gin <= '1'
+				R1i<='0';
+				R2i<='0';
+				R3i<='0';
+				Ai<='0';
+				Gi<='1';
+				R1o<='0';
+				R2o<='1';
+				R3o<='0';
+				Ao<='0';
+				Go<='0';
 				
 				WHEN I =>
 				
-				R3in <= '1'
-				Gout <= '1' 
+				
+				
+				R1i<='0';
+				R2i<='0';
+				R3i<='1';
+				Ai<='0';
+				Gi<='0';
+				R1o<='0';
+				R2o<='0';
+				R3o<='0';
+				Ao<='0';
+				Go<='1';
 
 				WHEN J =>
-				R2out <= '1'
-				G1in <= '1'
+
+				
+				R1i<='0';
+				R2i<='0';
+				R3i<='0';
+				Ai<='0';
+				Gi<='1';
+				R1o<='0';
+				R2o<='1';
+				R3o<='0';
+				Ao<='0';
+				Go<='0';
 				
 				WHEN K =>
-				G1out <='1'
-				R3in <= '1'
+				
+				R1i<='0';
+				R2i<='0';
+				R3i<='1';
+				Ai<='0';
+				Gi<='0';
+				R1o<='0';
+				R2o<='0';
+				R3o<='0';
+				Ao<='0';
+				Go<='1';
 				
 				WHEN L =>
 				
-				R2out = '1'
-				R2in = '1'
+			
+				
+				R1i<='0';
+				R2i<='0';
+				R3i<='1';
+				Ai<='0';
+				Gi<='0';
+				R1o<='0';
+				R2o<='1';
+				R3o<='0';
+				Ao<='0';
+				Go<='0';
 				
 				WHEN M =>
 				
-				R3out <= '1'
-				R1in <= '1'
+		
+				R1i<='1';
+				R2i<='0';
+				R3i<='0';
+				Ai<='0';
+				Gi<='0';
+				R1o<='0';
+				R2o<='0';
+				R3o<='1';
+				Ao<='0';
+				Go<='0';
 				
 			END CASE;
 	END PROCESS;   

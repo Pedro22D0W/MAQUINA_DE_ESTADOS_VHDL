@@ -8,14 +8,13 @@ Q : OUT STD_LOGIC_VECTOR(3 DOWNTO 0) ) ;
 END REGISTRADOR ;
 ARCHITECTURE logica OF REGISTRADOR IS
 BEGIN
-PROCESS ( Reset, Clock )
+PROCESS ( Reset, Clock,R1in,R1out )
 BEGIN
 IF Reset = '0' THEN
 Q <= (OTHERS => '0') ;
-ELSIF Clock'EVENT AND Clock = '1' AND R1in = '1'  THEN
+ELSIF Clock'EVENT AND Clock = '1' AND R1in = '1' THEN
 Q <= D ;
- elsif R1out = '1'
-	Q <= "0000"
-END IF ;
-END PROCESS ;
-END logica ;
+
+END IF;
+END PROCESS;
+END logica;

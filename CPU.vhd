@@ -1,6 +1,7 @@
 LIBRARY IEEE;
 USE IEEE.ALL;
 USE IEEE.STD_LOGIC_1164.ALL;
+USE WORK.CPU_package.all;
 
 ENTITY CPU IS 
 	PORT (
@@ -8,18 +9,35 @@ ENTITY CPU IS
 		Clock,Enable,Reset: IN STD_LOGIC;
 		FUNC : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
 		DONE : OUT STD_LOGIC;
-		R1,R2,R3: OUT STD
+		R1,R2,R3: INOUT STD_LOGIC_VECTOR(3 DOWNTO 0);
+		BFD,BF1,BF2,BF3 : INOUT STD_LOGIC_VECTOR(3 DOWNTO 0)
 		);
 END CPU;
 
 ARCHITECTURE logica OF CPU IS
-	signal R1in_cpu,R2in_cpu,R3in_cpu,Ain_cpu,Gin_cptu : IN STD_LOGIC;
-	signal R1out_cpu,R2out_cpu,R3out_cpu,Aout_cpu,Gout_cpu : IN STD_LOGIC;
+
+signal R1i_cpu,R2i_cpu,R3i_cpu,Ai_cpu,Gi_cpu : STD_LOGIC;
+signal R1o_cpu,R2o_cpu,R3o_cpu,Ao_cpu,Go_cpu : STD_LOGIC;
+
+begin
 	
-	UNIDADE_DE_CONTROLE: PROJETO_FINAL port map(Clock,Reset,FUNC,R1in_cpu,R2in_cpu,R3in_cpu,Ain_cpu,Gin_in,R1out_cpu,R2out_cpu,R3out_cpu,Aout_cpu,Gout_cpu);
-	R1: REGISTRADOR port map(DATA,Clock,Reset,R1in_cpu,R1out_cpu,R1);
-	R2: REGISTRADOR port map(DATA,Clock,Reset,R2in_cpu,R2out_cpu,R2);
-	R3: REGISTRADOR port map(DATA,Clock,Reset,R3in_cpu,R3out_cpu,R3);
+	
+	UNIDADE_DE_CONTROLE: PROJETO_FINAL port map(Clock,Reset,FUNC,R1i_cpu,R2i_cpu,R3i_cpu,Ai_cpu,Gi_cpu,R1o_cpu,R2o_cpu,R3o_cpu,Ao_cpu,Go_cpu);
+	Reg1: REGISTRADOR port map(DATA,Reset,Clock,R1i_cpu,R1o_cpu,R1);
+	Reg2: REGISTRADOR port map(DATA,Reset,Clock,R2i_cpu,R2o_cpu,R2);
+	Reg3: REGISTRADOR port map(DATA,Reset,Clock,R3i_cpu,R3o_cpu,R3);
+	
+	Bfr1 : BUFF port map(R1,R1o_cpu,BF1);
+	Bfr2 : BUFF port map(R2,R2o_cpu,BF2);
+	Bfr3 : BUFF port map(R3,R3o_cpu,BF3);
+	
+	
+	swap1: REGISTRADOR port map(BF2,Reset,Clock,R3i_cpu,R1o_cpu,R3);
+	swap2: REGISTRADOR port map(BF1,Reset,Clock,R2i_cpu,R2o_cpu,R2);
+	swap3: REGISTRADOR port map(BF3,Reset,Clock,R1i_cpu,R3o_cpu,R1);
+			
+	
+			
 	
 END logica ;
 	
