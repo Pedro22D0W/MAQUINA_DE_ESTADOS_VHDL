@@ -1,21 +1,22 @@
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
-USE IEEE.STD_LOGIC_ARITH.ALL;
+--USE IEEE.STD_LOGIC_ARITH.ALL;
+USE IEEE.NUMERIC_STD.ALL;
+USE WORK.CPU_package.all;
 
 ENTITY PROJETO_FINAL IS 
+
     PORT(
-        Clock : IN std_logic;
-        Reset : IN std_logic;
-        FUNC  : IN std_logic_vector(2 DOWNTO 0);
-        DATA  : IN std_logic_vector(3 DOWNTO 0);
-        DONE  : OUT std_logic
+        Clock,Reset : IN std_logic;
+		  FUNC : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
+        R1in,R2in,R3in,R1out,R2out,R3out : OUT STD_LOGIC
     );
+	 
 END PROJETO_FINAL;
 
 ARCHITECTURE logica OF PROJETO_FINAL IS
     TYPE STATE IS (A, B, C, D, E, F, G, H, I, J, K, L, M);
     SIGNAL ESTADO, PROX : STATE;
-    SIGNAL R1, R2, R3, A1, G1 : std_logic_vector(3 DOWNTO 0);
 BEGIN 
 
     PROCESS(Reset, Clock)
@@ -101,37 +102,63 @@ BEGIN
 			CASE ESTADO IS 
 	 
 				WHEN A =>
-				DONE <= '1';
+				
 				WHEN B =>
-				A1 <= R2;
+				
+				R2out <= '1';
+				Ain <= '1';
+				
 				WHEN C =>
-				A1 <= R2;
+
+				R2out <= '1';
+				Ain <= '1';
+				
 				WHEN D =>
-				R3 <= R2;
+				
+				R2out <= '1';
+				R3in <= '1';
+				
 				WHEN E =>
-				R1 <= DATA;
-				WHEN F =>
-				R2 <= DATA;
+				
+				R1in <= '1'
+				
+				WHEN F =>;
+				
+				R2in <= '1'
+				
 				WHEN G =>
-				R3 <= DATA;
+				
+				R3in <= '1'
+				DONE <= '1'
+				
 				WHEN H =>
-				G1 <= A1 XOR R1;
+				
+				R2out <= '1'
+				Gin <= '1'
+				
 				WHEN I =>
-				R3 <= G1;
+				
+				R3in <= '1'
+				Gout <= '1' 
+
 				WHEN J =>
-				G1 <= A1 XOR R1;
+				R2out <= '1'
+				G1in <= '1'
+				
 				WHEN K =>
-				R3 <= G1;
+				G1out <='1'
+				R3in <= '1'
+				
 				WHEN L =>
-				R2 <= R1;
+				
+				R2out = '1'
+				R2in = '1'
+				
 				WHEN M =>
-				R1 <= R3;
+				
+				R3out <= '1'
+				R1in <= '1'
 				
 			END CASE;
 	END PROCESS;   
 END logica;
-
-			
-	
-	
-		
