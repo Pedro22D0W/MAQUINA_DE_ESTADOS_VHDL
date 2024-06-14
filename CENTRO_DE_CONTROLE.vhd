@@ -21,7 +21,7 @@ BEGIN
 
     PROCESS(Reset, Clock)
     BEGIN 
-        IF Reset = '1' THEN
+        IF Reset = '0' THEN
             ESTADO <= A;
         ELSIF rising_edge(Clock) THEN 
             ESTADO <= PROX;
@@ -103,6 +103,16 @@ BEGIN
 	 
 				WHEN A =>
 				
+				R1i<='0';
+				R2i<='0';
+				R3i<='0';
+				Ai<='0';
+				Gi<='0';
+				R1o<='0';
+				R2o<='0';
+				R3o<='0';
+				Ao<='0';
+				Go<='0';
 				
 				
 				WHEN B =>
@@ -153,7 +163,7 @@ BEGIN
 				Ai<='0';
 				Gi<='0';
 				R1o<='0';
-				R2o<='1';
+				R2o<='0';
 				R3o<='0';
 				Ao<='0';
 				Go<='0';
