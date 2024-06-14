@@ -26,7 +26,7 @@ END COMPONENT ;
 COMPONENT REGISTRADOR
 
 PORT ( D : IN STD_LOGIC_VECTOR(3 DOWNTO 0) ;
-Reset, Clock, R1in : IN STD_LOGIC ;
+Reset, Clock, R1in,Enable : IN STD_LOGIC ;
 Q : OUT STD_LOGIC_VECTOR(3 DOWNTO 0) ) ;
 
 END COMPONENT ;
@@ -36,7 +36,8 @@ COMPONENT CENTRO_DE_CONTROLE
     PORT(
         Clock,Reset : IN std_logic;
 		  FUNC : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
-        R1i,R2i,R3i,Ai,Gi,R1o,R2o,R3o,Ao,Go : OUT STD_LOGIC
+		   Enable : IN STD_LOGIC;
+        Do,R1i,R2i,R3i,Ai,Gi,R1o,R2o,R3o,Ao,Go : OUT STD_LOGIC
     );
 	 
 END COMPONENT;

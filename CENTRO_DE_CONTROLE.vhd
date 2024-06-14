@@ -9,7 +9,8 @@ ENTITY CENTRO_DE_CONTROLE IS
     PORT(
         Clock,Reset : IN std_logic;
 		  FUNC : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
-        R1i,R2i,R3i,Ai,Gi,R1o,R2o,R3o,Ao,Go : OUT STD_LOGIC
+		  Enable : IN STD_LOGIC;
+        Do,R1i,R2i,R3i,Ai,Gi,R1o,R2o,R3o,Ao,Go : OUT STD_LOGIC
     );
 	 
 END CENTRO_DE_CONTROLE;
@@ -19,11 +20,11 @@ ARCHITECTURE logica OF CENTRO_DE_CONTROLE IS
     SIGNAL ESTADO, PROX : STATE;
 BEGIN 
 
-    PROCESS(Reset, Clock)
+    PROCESS(Reset, Clock,Enable)
     BEGIN 
         IF Reset = '0' THEN
             ESTADO <= A;
-        ELSIF rising_edge(Clock) THEN 
+        ELSIF rising_edge(Clock) and Enable = '1' THEN 
             ESTADO <= PROX;
         END IF;
     END PROCESS;
@@ -102,7 +103,7 @@ BEGIN
 			CASE ESTADO IS 
 	 
 				WHEN A =>
-				
+				Do <= '0';
 				R1i<='0';
 				R2i<='0';
 				R3i<='0';
@@ -117,6 +118,7 @@ BEGIN
 				
 				WHEN B =>
 				
+				Do <= '0';
 				R1i<='0';
 				R2i<='0';
 				R3i<='0';
@@ -130,6 +132,7 @@ BEGIN
 				
 				WHEN C =>
 				
+				Do <= '0';
 				R1i<='0';
 				R2i<='0';
 				R3i<='0';
@@ -143,7 +146,7 @@ BEGIN
 				
 				WHEN D =>
 				
-				
+				Do <= '0';
 				R1i<='0';
 				R2i<='0';
 				R3i<='1';
@@ -157,6 +160,8 @@ BEGIN
 				
 				WHEN E =>
 				
+				
+				Do <= '1';
 				R1i<='1';
 				R2i<='0';
 				R3i<='0';
@@ -170,8 +175,7 @@ BEGIN
 				
 				WHEN F =>
 				
-
-				
+				Do <= '1';
 				R1i<='0';
 				R2i<='1';
 				R3i<='0';
@@ -185,6 +189,9 @@ BEGIN
 				
 				WHEN G =>
 				
+				
+				
+				Do <= '1';
 				R1i<='0';
 				R2i<='0';
 				R3i<='1';
@@ -199,6 +206,7 @@ BEGIN
 				
 				WHEN H =>
 				
+				Do <= '0';
 				R1i<='0';
 				R2i<='0';
 				R3i<='0';
@@ -213,7 +221,7 @@ BEGIN
 				WHEN I =>
 				
 				
-				
+				Do <= '0';
 				R1i<='0';
 				R2i<='0';
 				R3i<='1';
@@ -227,7 +235,7 @@ BEGIN
 
 				WHEN J =>
 
-				
+				Do <= '0';
 				R1i<='0';
 				R2i<='0';
 				R3i<='0';
@@ -241,6 +249,7 @@ BEGIN
 				
 				WHEN K =>
 				
+				Do <= '0';
 				R1i<='0';
 				R2i<='0';
 				R3i<='1';
@@ -255,7 +264,7 @@ BEGIN
 				WHEN L =>
 				
 			
-				
+				Do <= '0';
 				R1i<='0';
 				R2i<='0';
 				R3i<='1';
@@ -269,7 +278,7 @@ BEGIN
 				
 				WHEN M =>
 				
-		
+				Do <= '0';
 				R1i<='1';
 				R2i<='0';
 				R3i<='0';
