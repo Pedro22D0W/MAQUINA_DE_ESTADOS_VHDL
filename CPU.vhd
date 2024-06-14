@@ -22,7 +22,7 @@ signal R1o_cpu,R2o_cpu,R3o_cpu,Ao_cpu,Go_cpu : STD_LOGIC;
 begin
 	
 	
-	UNIDADE_DE_CONTROLE: PROJETO_FINAL port map(Clock,Reset,FUNC,R1i_cpu,R2i_cpu,R3i_cpu,Ai_cpu,Gi_cpu,R1o_cpu,R2o_cpu,R3o_cpu,Ao_cpu,Go_cpu);
+	UNIDADE_DE_CONTROLE: CENTRO_DE_CONTROLE port map(Clock,Reset,FUNC,R1i_cpu,R2i_cpu,R3i_cpu,Ai_cpu,Gi_cpu,R1o_cpu,R2o_cpu,R3o_cpu,Ao_cpu,Go_cpu);
 	Reg1: REGISTRADOR port map(DATA,Reset,Clock,R1i_cpu,R1o_cpu,R1);
 	Reg2: REGISTRADOR port map(DATA,Reset,Clock,R2i_cpu,R2o_cpu,R2);
 	Reg3: REGISTRADOR port map(DATA,Reset,Clock,R3i_cpu,R3o_cpu,R3);
@@ -32,9 +32,9 @@ begin
 	Bfr3 : BUFF port map(R3,R3o_cpu,BF3);
 	
 	
-	swap1: REGISTRADOR port map(BF2,Reset,Clock,R3i_cpu,R1o_cpu,R3);
-	swap2: REGISTRADOR port map(BF1,Reset,Clock,R2i_cpu,R2o_cpu,R2);
-	swap3: REGISTRADOR port map(BF3,Reset,Clock,R1i_cpu,R3o_cpu,R1);
+	--swap1: REGISTRADOR port map(BF2,Reset,Clock,R3i_cpu,R1o_cpu,R3);
+	--swap2: REGISTRADOR port map(BF1,Reset,Clock,R2i_cpu,R2o_cpu,R2);
+	--swap3: REGISTRADOR port map(BF3,Reset,Clock,R1i_cpu,R3o_cpu,R1);
 			
 	
 			
