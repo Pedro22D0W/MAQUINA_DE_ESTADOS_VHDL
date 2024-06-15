@@ -10,7 +10,7 @@ ENTITY CENTRO_DE_CONTROLE IS
         Clock,Reset : IN std_logic;
 		  FUNC : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
 		  Enable : IN STD_LOGIC;
-        Do,R1i,R2i,R3i,Ai,Gi,R1o,R2o,R3o,Ao,Go : OUT STD_LOGIC
+        Do,R1i,R2i,R3i,Ai,Gi,R1o,R2o,R3o,Ao,Go,Add_Sub : OUT STD_LOGIC
     );
 	 
 END CENTRO_DE_CONTROLE;
@@ -24,29 +24,29 @@ BEGIN
     BEGIN 
         IF Reset = '0' THEN
             ESTADO <= A;
-        ELSIF rising_edge(Clock) and Enable = '1' THEN 
+        ELSIF rising_edge(Clock) THEN 
             ESTADO <= PROX;
-        END IF;
-    END PROCESS;
-
-    PROCESS (ESTADO, FUNC)
-    BEGIN 
+					
         CASE ESTADO IS 
             WHEN A =>
-                IF FUNC = "000" THEN
+				
+                IF (FUNC = "000") AND (Enable = '1') THEN
                     PROX <= A;
-                ELSIF FUNC = "001" THEN
+                ELSIF (FUNC = "001") AND(Enable = '1') THEN
                     PROX <= B;
-                ELSIF FUNC = "010" THEN
+                ELSIF (FUNC = "010") AND(Enable = '1') THEN
                     PROX <= C;
-                ELSIF FUNC = "011" THEN
+                ELSIF (FUNC = "011")AND (Enable = '1') THEN
                     PROX <= D;
-                ELSIF FUNC = "101" THEN
+					 ELSIF (FUNC = "100")AND (Enable = '1') THEN
+                    PROX <= A;
+                ELSIF (FUNC = "101")AND (Enable = '1') THEN
                     PROX <= E;
-                ELSIF FUNC = "110" THEN
+                ELSIF (FUNC = "110")AND (Enable = '1') THEN
                     PROX <= F;
-                ELSIF FUNC = "111" THEN
+                ELSIF (FUNC = "111") AND(Enable = '1') THEN
                     PROX <= G;
+					 
                 END IF;
                 
             WHEN B =>
@@ -97,9 +97,7 @@ BEGIN
                 
                 PROX <= A;
         END CASE;
-    END PROCESS;
-	 PROCESS(ESTADO,Clock)
-		BEGIN
+		  
 			CASE ESTADO IS 
 	 
 				WHEN A =>
@@ -114,6 +112,8 @@ BEGIN
 				R3o<='0';
 				Ao<='0';
 				Go<='0';
+				Add_Sub<= '0';
+				
 				
 				
 				WHEN B =>
@@ -129,6 +129,7 @@ BEGIN
 				R3o<='0';
 				Ao<='0';
 				Go<='0';
+				Add_Sub<= '0';
 				
 				WHEN C =>
 				
@@ -143,6 +144,7 @@ BEGIN
 				R3o<='0';
 				Ao<='0';
 				Go<='0';
+				Add_Sub<= '0';
 				
 				WHEN D =>
 				
@@ -157,6 +159,7 @@ BEGIN
 				R3o<='0';
 				Ao<='0';
 				Go<='0';
+				Add_Sub<= '0';
 				
 				WHEN E =>
 				
@@ -172,6 +175,7 @@ BEGIN
 				R3o<='0';
 				Ao<='0';
 				Go<='0';
+				Add_Sub<= '0';
 				
 				WHEN F =>
 				
@@ -186,6 +190,7 @@ BEGIN
 				R3o<='0';
 				Ao<='0';
 				Go<='0';
+				Add_Sub<= '0';
 				
 				WHEN G =>
 				
@@ -202,6 +207,7 @@ BEGIN
 				R3o<='0';
 				Ao<='0';
 				Go<='0';
+				Add_Sub<= '0';
 				
 				
 				WHEN H =>
@@ -217,6 +223,7 @@ BEGIN
 				R3o<='0';
 				Ao<='0';
 				Go<='0';
+				Add_Sub<= '1';
 				
 				WHEN I =>
 				
@@ -232,6 +239,7 @@ BEGIN
 				R3o<='0';
 				Ao<='0';
 				Go<='1';
+				Add_Sub<= '0';
 
 				WHEN J =>
 
@@ -246,6 +254,7 @@ BEGIN
 				R3o<='0';
 				Ao<='0';
 				Go<='0';
+				Add_Sub<= '0';
 				
 				WHEN K =>
 				
@@ -260,21 +269,23 @@ BEGIN
 				R3o<='0';
 				Ao<='0';
 				Go<='1';
+				Add_Sub<= '0';
 				
 				WHEN L =>
 				
 			
 				Do <= '0';
 				R1i<='0';
-				R2i<='0';
-				R3i<='1';
+				R2i<='1';
+				R3i<='0';
 				Ai<='0';
 				Gi<='0';
-				R1o<='0';
-				R2o<='1';
+				R1o<='1';
+				R2o<='0';
 				R3o<='0';
 				Ao<='0';
 				Go<='0';
+				Add_Sub<= '0';
 				
 				WHEN M =>
 				
@@ -289,7 +300,16 @@ BEGIN
 				R3o<='1';
 				Ao<='0';
 				Go<='0';
+				Add_Sub<= '0';
+				
+				if Enable = '0' then
+					PROX <= A;
+				ELSE 
+					PROX <= M;
+					
+				END IF;
 				
 			END CASE;
+		END IF;
 	END PROCESS;   
 END logica;
