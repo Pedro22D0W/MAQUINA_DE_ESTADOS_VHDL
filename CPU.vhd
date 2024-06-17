@@ -8,7 +8,7 @@ ENTITY CPU IS
 		SW : IN STD_LOGIC_VECTOR(17 DOWNTO 0);
 		CLOCK_50 : IN STD_LOGIC;
 		DONE : OUT STD_LOGIC;
-		R1,R2,R3,RG: INOUT STD_LOGIC_VECTOR(3 DOWNTO 0);
+		R1,R2,R3: INOUT STD_LOGIC_VECTOR(3 DOWNTO 0);
 		HEX0,HEX1,HEX2,HEX4,HEX5,HEX7,HEX6 : OUT STD_LOGIC_VECTOR(0 TO 6);
 		LEDR: OUT STD_LOGIC_VECTOR(17 DOWNTO 0)
 		);
@@ -19,7 +19,7 @@ ARCHITECTURE logica OF CPU IS
 signal Enable : std_logic;
 signal Reset : std_logic;
 signal FUNC : std_logic_vector(2 downto 0);
-signal DATA,RA : std_logic_vector(3 downto 0);
+signal DATA,RA,RG,RG2 : std_logic_vector(3 downto 0);
 signal R1i_cpu,R2i_cpu,R3i_cpu,Ai_cpu,Gi_cpu : STD_LOGIC;
 signal Do_cpu,R1o_cpu,R2o_cpu,R3o_cpu,Ao_cpu,Go_cpu,AddSub_cpu,Cout_cpu : STD_LOGIC;
 Signal BOS : std_logic_vector(3 downto 0);
@@ -46,15 +46,16 @@ begin
 	Reg2: REGISTRADOR port map(BOS,Reset,CLOCK_50,R2i_cpu,Enable,R2);
 	Reg3: REGISTRADOR port map(BOS,Reset,CLOCK_50,R3i_cpu,Enable,R3);
 	RegA: REGISTRADOR port map(BOS,Reset,CLOCK_50,Ai_cpu,Enable,RA);
-	RegG: REGISTRADOR port map(BOS,Reset,CLOCK_50,Gi_cpu,Enable,RG);
+	RegG: REGISTRADOR port map(BOS,Reset,CLOCK_50,Gi_cpu,Enable,RG2);
+	
 	
 	BfrD : BUFF port map(DATA,Do_cpu,BOS);
 	Bfr1 : BUFF port map(R1,R1o_cpu,BOS);
 	Bfr2 : BUFF port map(R2,R2o_cpu,BOS);
 	Bfr3 : BUFF port map(R3,R3o_cpu,BOS);
-	BfrG : BUFF port map(RG,Go_cpu,BOS);
+	BfrG : BUFF port map(RG2,Go_cpu,BOS);
 	
-	--ad: ADD_SUB port map(Cin => AddSub_cpu,X => RA,Y => BOS,S => RG,Cout => Cout_cpu);
+	ad: ADD_SUB port map(Cin => AddSub_cpu,X => RA,Y => BOS,S => RG2,Cout => Cout_cpu);
 	
 	
 	with R1 select
