@@ -215,9 +215,9 @@ BEGIN
 				Add_Sub<= '0';
 				
 				if Enable = '0' then
-					PROX <= A;
+					ESTADO <= A;
 				ELSE 
-					PROX <= M;
+					ESTADO <= M;
 					
 				END IF;
                 

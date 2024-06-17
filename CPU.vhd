@@ -34,7 +34,7 @@ begin
 	LEDR(17)<= Enable;
 	
 	FUNC <= SW(2 DOWNTO 0);
-	DATA <= SW(6 DOWNTO 3) WHEN Enable = '1';
+	DATA <= SW(6 DOWNTO 3); --WHEN Enable = '1';
 
 	
 	
@@ -54,7 +54,7 @@ begin
 	Bfr3 : BUFF port map(R3,R3o_cpu,BOS);
 	BfrG : BUFF port map(RG,Go_cpu,BOS);
 	
-	ad: ADD_SUB port map(Cin => AddSub_cpu,X => RA,Y => BOS,S => RG,Cout => Cout_cpu);
+	--ad: ADD_SUB port map(Cin => AddSub_cpu,X => RA,Y => BOS,S => RG,Cout => Cout_cpu);
 	
 	
 	with R1 select
